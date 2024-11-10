@@ -1,0 +1,33 @@
+{% extends "movies/base.html" %}
+{% block content %}
+<article class="media content-section">
+    {% comment %} <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="float: left;"> {% endcomment %}
+
+    <div class="media-body" >
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'user-movies' object.author.username%}">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted | date:"F d, Y" }}</small>
+            
+            {% if object.author == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'movie-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'movie-delete' object.id %}">Delete</a>
+            </div>
+            {% endif %}
+        </div>
+        
+        <h2><i>Movie Name : </i><a class="article-title" href="{% url 'movie-detail' movie.id %}">{{ object.name }}</a></h2>
+        <p class="article-content"> <i>Movie Genre : </i>{{ object.genre }}</p>
+        <p class="article-content"> <i>Movie Release Date : </i>{{ object.release_date }}</p>
+        <p class="article-content"> <i>Movie Rating : </i>{{ object.rating }}</p>
+        <p class="article-content"> <i>Informed By : </i>{{ object.author }}</p>
+
+        <form method="POST" action="{% url 'rate_movie' movie.id %}">
+            {% csrf_token %}
+            {{ rating_form.as_p }}
+            <button type="submit">Submit Rating</button>
+        </form>
+    </div>
+</article>
+{% endblock content %}
+<!-- | date:"F d, Y" -->
