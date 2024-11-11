@@ -69,8 +69,8 @@ DATABASES = {
 
 SECRET_KEY = 'django-insecure-sorfwj7jbssj)*x47!=$!fr6ac%1z)0+$!a9i2_yd@f27@f$4a'
 DEBUG = True
-# ALLOWED_HOSTS = []
-# CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['rateflix-production.up.railway.app', 'https://rateflix-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://rateflix-production.up.railway.app']
 
 
 AUTH_PASSWORD_VALIDATORS = [
